@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "./component/Button";
+
 const messages = [
   "Learn React ⚛️",
   "Apply for jobs 💼",
@@ -17,6 +17,7 @@ function App() {
   }
   function handleNext() {
     if (step < 3) {
+      setStep((s) => s + 1);
       setStep((s) => s + 1);
     }
   }
@@ -39,33 +40,26 @@ function App() {
             <div className={`${step >= 3 ? "active" : ""}`}>3</div>
           </div>
 
-          <StepMessage step={step}>{messages[step - 1]}</StepMessage>
-
+          <p className="message">
+            Steps {step}: {messages[step - 1]}
+          </p>
           <div className="buttons">
-            <Button
-              bgColor="#7950f2"
-              textColor="#fff"
-              handleEvent={handlePrevious}
+            <button
+              style={{ backgroundColor: "#7950f2", color: "#fff" }}
+              onClick={handlePrevious}
             >
-              <span>👈</span>Previous
-            </Button>
-
-            <Button bgColor="#7950f2" textColor="#fff" handleEvent={handleNext}>
-              Next<span>👉</span>
-            </Button>
+              Previous
+            </button>
+            <button
+              style={{ backgroundColor: "#7950f2", color: "#fff" }}
+              onClick={handleNext}
+            >
+              Next
+            </button>
           </div>
         </div>
       )}
     </>
-  );
-}
-
-function StepMessage({ step, children }) {
-  return (
-    <div className="message">
-      <h3>Step {step} :</h3>
-      {children}
-    </div>
   );
 }
 
